@@ -6,18 +6,18 @@ import '../models/meal.dart';
 class MealItem extends StatelessWidget {
   final String id;
   final String title;
-  final String imageURL;
+  final String imageUrl;
   final int duration;
   final Complexity complexity;
   final Affordability affordability;
 
   MealItem({
     @required this.id,
+    @required this.title,
+    @required this.imageUrl,
     @required this.affordability,
     @required this.complexity,
     @required this.duration,
-    @required this.imageURL,
-    @required this.title,
   });
 
   String get complexityText {
@@ -25,14 +25,11 @@ class MealItem extends StatelessWidget {
       case Complexity.Simple:
         return 'Simple';
         break;
-      case Complexity.Medium:
-        return 'Medium';
+      case Complexity.Challenging:
+        return 'Challenging';
         break;
       case Complexity.Hard:
         return 'Hard';
-        break;
-      case Complexity.Challenging:
-        return 'Challenging';
         break;
       default:
         return 'Unknown';
@@ -48,19 +45,17 @@ class MealItem extends StatelessWidget {
         return 'Pricey';
         break;
       case Affordability.Luxurious:
-        return 'Luxurious';
+        return 'Expensive';
         break;
       default:
         return 'Unknown';
     }
   }
 
-  void selectMeal(BuildContext ctx) {
-    Navigator.of(ctx).pushNamed(
+  void selectMeal(BuildContext context) {
+    Navigator.of(context).pushNamed(
       MealDetailScreen.routeName,
-      arguments: {
-        id,
-      },
+      arguments: id,
     );
   }
 
@@ -75,16 +70,16 @@ class MealItem extends StatelessWidget {
         elevation: 4,
         margin: EdgeInsets.all(10),
         child: Column(
-          children: [
+          children: <Widget>[
             Stack(
-              children: [
+              children: <Widget>[
                 ClipRRect(
                   borderRadius: BorderRadius.only(
                     topLeft: Radius.circular(15),
                     topRight: Radius.circular(15),
                   ),
                   child: Image.network(
-                    imageURL,
+                    imageUrl,
                     height: 250,
                     width: double.infinity,
                     fit: BoxFit.cover,
@@ -96,7 +91,10 @@ class MealItem extends StatelessWidget {
                   child: Container(
                     width: 300,
                     color: Colors.black54,
-                    padding: EdgeInsets.symmetric(vertical: 5, horizontal: 20),
+                    padding: EdgeInsets.symmetric(
+                      vertical: 5,
+                      horizontal: 20,
+                    ),
                     child: Text(
                       title,
                       style: TextStyle(
@@ -107,16 +105,16 @@ class MealItem extends StatelessWidget {
                       overflow: TextOverflow.fade,
                     ),
                   ),
-                ),
+                )
               ],
             ),
             Padding(
               padding: EdgeInsets.all(20),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: [
+                children: <Widget>[
                   Row(
-                    children: [
+                    children: <Widget>[
                       Icon(
                         Icons.schedule,
                       ),
@@ -127,7 +125,7 @@ class MealItem extends StatelessWidget {
                     ],
                   ),
                   Row(
-                    children: [
+                    children: <Widget>[
                       Icon(
                         Icons.work,
                       ),
@@ -138,7 +136,7 @@ class MealItem extends StatelessWidget {
                     ],
                   ),
                   Row(
-                    children: [
+                    children: <Widget>[
                       Icon(
                         Icons.attach_money,
                       ),
